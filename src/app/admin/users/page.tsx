@@ -156,7 +156,7 @@ export default function AdminUsersPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 p-8">
+    <div className="min-h-screen bg-white dark:bg-black p-8">
       <div className="max-w-7xl mx-auto">
         <div className="flex justify-between items-center mb-8">
           <h1 className="text-3xl font-bold text-gray-900">User Management</h1>
@@ -203,12 +203,12 @@ export default function AdminUsersPage() {
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
                     <span
-                      className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${
+                      className={`px-3 py-1.5 inline-flex text-xs leading-5 font-bold rounded-xl shadow-md ${
                         user.role === "admin"
-                          ? "bg-purple-100 text-purple-800"
+                          ? "bg-purple-600 text-white dark:bg-purple-500"
                           : user.role === "manager"
-                          ? "bg-blue-100 text-blue-800"
-                          : "bg-green-100 text-green-800"
+                          ? "bg-blue-600 text-white dark:bg-blue-500"
+                          : "bg-emerald-600 text-white dark:bg-emerald-500"
                       }`}
                     >
                       {user.role}

@@ -169,9 +169,10 @@ export default function ExpensesPage() {
   if (loading) return <Loading />;
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-      <div className="flex justify-between items-center mb-8">
-        <h1 className="text-3xl font-bold text-gray-900">Expenses</h1>
+    <div className="min-h-screen bg-white dark:bg-black">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div className="flex justify-between items-center mb-8">
+          <h1 className="text-4xl font-black text-slate-900 dark:text-slate-100 tracking-tight">Expenses</h1>
         <div className="flex gap-2">
           <Button variant="outline" onClick={handleExport}>
             Export CSV
@@ -324,15 +325,15 @@ export default function ExpensesPage() {
                 {expenses.map((expense) => {
                   const getStatusBadge = (status: string) => {
                     const colors = {
-                      Pending: "bg-yellow-100 text-yellow-800",
-                      Approved: "bg-green-100 text-green-800",
-                      Rejected: "bg-red-100 text-red-800",
+                      Pending: "bg-amber-600 text-white dark:bg-amber-500",
+                      Approved: "bg-emerald-600 text-white dark:bg-emerald-500",
+                      Rejected: "bg-red-600 text-white dark:bg-red-500",
                     };
                     return (
                       <span
-                        className={`px-2 py-1 text-xs font-semibold rounded ${
+                        className={`px-3 py-1.5 text-xs font-bold rounded-xl shadow-md ${
                           colors[status as keyof typeof colors] ||
-                          "bg-gray-100 text-gray-800"
+                          "bg-gray-600 text-white dark:bg-gray-500"
                         }`}
                       >
                         {status}
@@ -392,6 +393,7 @@ export default function ExpensesPage() {
           </div>
         )}
       </Card>
+      </div>
     </div>
   );
 }

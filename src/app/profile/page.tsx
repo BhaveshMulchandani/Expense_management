@@ -28,91 +28,96 @@ export default function ProfilePage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 py-12">
+    <div className="min-h-screen bg-white dark:bg-black py-12">
       <div className="max-w-4xl mx-auto px-4">
-        <h1 className="text-3xl font-bold mb-8">Your Profile</h1>
+        <h1 className="text-4xl font-black text-black dark:text-white mb-8 tracking-tight">Your Profile</h1>
 
-        <div className="bg-white rounded-lg shadow p-6 space-y-4">
+        <div className="bg-gray-50 dark:bg-gray-900 rounded-2xl shadow-lg p-8 space-y-6 border-2 border-gray-200 dark:border-gray-700">
           <div>
-            <label className="text-sm font-medium text-gray-500">Name</label>
-            <p className="text-lg">{session.user.name}</p>
+            <label className="text-sm font-bold text-gray-700 dark:text-gray-300 uppercase tracking-wide">Name</label>
+            <p className="text-xl font-semibold text-black dark:text-white mt-1">{session.user.name}</p>
           </div>
 
           <div>
-            <label className="text-sm font-medium text-gray-500">Email</label>
-            <p className="text-lg">{session.user.email}</p>
+            <label className="text-sm font-bold text-gray-700 dark:text-gray-300 uppercase tracking-wide">Email</label>
+            <p className="text-xl font-semibold text-black dark:text-white mt-1">{session.user.email}</p>
           </div>
 
           <div>
-            <label className="text-sm font-medium text-gray-500">Role</label>
-            <p className="text-lg capitalize">
+            <label className="text-sm font-bold text-gray-700 dark:text-gray-300 uppercase tracking-wide">Role</label>
+            <p className="text-lg mt-2">
               <span
-                className={`inline-flex items-center px-3 py-1 rounded-full text-sm font-medium ${
+                className={`inline-flex items-center px-4 py-2 rounded-xl text-sm font-bold shadow-lg capitalize ${
                   session.user.role === "admin"
-                    ? "bg-purple-100 text-purple-800"
+                    ? "bg-purple-600 text-white dark:bg-purple-500"
                     : session.user.role === "manager"
-                    ? "bg-blue-100 text-blue-800"
-                    : "bg-green-100 text-green-800"
+                    ? "bg-blue-600 text-white dark:bg-blue-500"
+                    : "bg-emerald-600 text-white dark:bg-emerald-500"
                 }`}
               >
+                {session.user.role === "admin" && "👑 "}
+                {session.user.role === "manager" && "⭐ "}
+                {session.user.role === "employee" && "👤 "}
                 {session.user.role}
               </span>
             </p>
           </div>
 
           <div>
-            <label className="text-sm font-medium text-gray-500">User ID</label>
-            <p className="text-sm font-mono bg-gray-100 p-2 rounded">
+            <label className="text-sm font-bold text-gray-700 dark:text-gray-300 uppercase tracking-wide">User ID</label>
+            <p className="text-sm font-mono bg-white dark:bg-black border-2 border-gray-300 dark:border-gray-600 p-3 rounded-lg mt-1 text-black dark:text-white font-semibold">
               {session.user.id}
             </p>
           </div>
 
           <div>
-            <label className="text-sm font-medium text-gray-500">
+            <label className="text-sm font-bold text-gray-700 dark:text-gray-300 uppercase tracking-wide">
               Company ID
             </label>
-            <p className="text-sm font-mono bg-gray-100 p-2 rounded">
+            <p className="text-sm font-mono bg-white dark:bg-black border-2 border-gray-300 dark:border-gray-600 p-3 rounded-lg mt-1 text-black dark:text-white font-semibold">
               {session.user.companyId}
             </p>
           </div>
 
           {session.user.managerId && (
             <div>
-              <label className="text-sm font-medium text-gray-500">
+              <label className="text-sm font-bold text-gray-700 dark:text-gray-300 uppercase tracking-wide">
                 Manager ID
               </label>
-              <p className="text-sm font-mono bg-gray-100 p-2 rounded">
+              <p className="text-sm font-mono bg-white dark:bg-black border-2 border-gray-300 dark:border-gray-600 p-3 rounded-lg mt-1 text-black dark:text-white font-semibold">
                 {session.user.managerId}
               </p>
             </div>
           )}
         </div>
 
-        <div className="mt-8 bg-blue-50 border border-blue-200 rounded-lg p-4">
-          <h2 className="text-lg font-semibold mb-2">Role Permissions</h2>
-          <ul className="space-y-2 text-sm">
+        <div className="mt-8 bg-gradient-to-br from-indigo-50 to-violet-50 dark:from-gray-800 dark:to-gray-900 border-2 border-indigo-300 dark:border-indigo-600 rounded-2xl p-6 shadow-lg">
+          <h2 className="text-2xl font-black text-black dark:text-white mb-4 flex items-center gap-2">
+            🔐 Role Permissions
+          </h2>
+          <ul className="space-y-3 text-base font-semibold text-black dark:text-white">
             {session.user.role === "admin" && (
               <>
-                <li>✅ Create and manage users</li>
-                <li>✅ Configure approval rules</li>
-                <li>✅ View all company expenses</li>
-                <li>✅ Override approvals</li>
+                <li className="flex items-center gap-2">✅ Create and manage users</li>
+                <li className="flex items-center gap-2">✅ Configure approval rules</li>
+                <li className="flex items-center gap-2">✅ View all company expenses</li>
+                <li className="flex items-center gap-2">✅ Override approvals</li>
               </>
             )}
             {session.user.role === "manager" && (
               <>
-                <li>✅ Create own expenses</li>
-                <li>✅ Approve/reject team expenses</li>
-                <li>✅ View team member expenses</li>
-                <li>✅ Add approval comments</li>
+                <li className="flex items-center gap-2">✅ Create own expenses</li>
+                <li className="flex items-center gap-2">✅ Approve/reject team expenses</li>
+                <li className="flex items-center gap-2">✅ View team member expenses</li>
+                <li className="flex items-center gap-2">✅ Add approval comments</li>
               </>
             )}
             {session.user.role === "employee" && (
               <>
-                <li>✅ Create and submit expenses</li>
-                <li>✅ Upload receipts</li>
-                <li>✅ Track expense status</li>
-                <li>✅ View personal analytics</li>
+                <li className="flex items-center gap-2">✅ Create and submit expenses</li>
+                <li className="flex items-center gap-2">✅ Upload receipts</li>
+                <li className="flex items-center gap-2">✅ Track expense status</li>
+                <li className="flex items-center gap-2">✅ View personal analytics</li>
               </>
             )}
           </ul>

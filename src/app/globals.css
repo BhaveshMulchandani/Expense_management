@@ -1,26 +1,350 @@
 @import "tailwindcss";
 
 :root {
+  /* Light Mode - High Contrast Palette */
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #000000;
+  --card-bg: #ffffff;
+  --border: #d1d5db;
+  --muted: #6b7280;
+  --accent: #6366f1;
+  --accent-hover: #4f46e5;
+  --success: #059669;
+  --warning: #d97706;
+  --danger: #dc2626;
+  --info: #2563eb;
+  
+  /* Subtle Gradients */
+  --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --gradient-secondary: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  --gradient-success: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+  
+  /* Shadows */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-feature-settings: "kern" 1, "liga" 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
+  font-weight: 500; /* Slightly bolder for better readability */
+}
+
+/* Ensure text is always visible with high contrast */
+body, #__next, [id^="__next"] {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+@media (prefers-color-scheme: dark) {
+  body, #__next, [id^="__next"] {
+    background-color: #000000;
+    color: #ffffff;
+  }
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #000000;
+    --foreground: #ffffff;
+    --card-bg: #1a1a1a;
+    --border: #404040;
+    --muted: #a3a3a3;
   }
 }
 
-body {
+/* Smooth Transitions */
+* {
+  transition-property: background-color, border-color, color, fill, stroke;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
   background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--muted);
+}
+
+/* Glassmorphism Effect */
+.glass {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  color: #000000;
+}
+
+@media (prefers-color-scheme: dark) {
+  .glass {
+    background: rgba(26, 26, 26, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #ffffff;
+  }
+}
+
+/* High Contrast Text Color Overrides */
+/* Light mode - Dark text on light backgrounds */
+.text-gray-900,
+.text-slate-900 {
+  color: #000000 !important;
+  font-weight: 600 !important;
+}
+
+.text-gray-800,
+.text-slate-800 {
+  color: #1a1a1a !important;
+  font-weight: 600 !important;
+}
+
+.text-gray-700,
+.text-slate-700 {
+  color: #262626 !important;
+  font-weight: 600 !important;
+}
+
+.text-gray-600,
+.text-slate-600 {
+  color: #404040 !important;
+  font-weight: 500 !important;
+}
+
+.text-gray-500,
+.text-slate-500 {
+  color: #525252 !important;
+  font-weight: 500 !important;
+}
+
+.text-gray-400,
+.text-slate-400 {
+  color: #737373 !important;
+  font-weight: 500 !important;
+}
+
+/* Dark mode - Light text on dark backgrounds */
+@media (prefers-color-scheme: dark) {
+  .text-gray-900,
+  .text-slate-900 {
+    color: #ffffff !important;
+    font-weight: 600 !important;
+  }
+
+  .text-gray-800,
+  .text-slate-800 {
+    color: #f5f5f5 !important;
+    font-weight: 600 !important;
+  }
+
+  .text-gray-700,
+  .text-slate-700 {
+    color: #e5e5e5 !important;
+    font-weight: 600 !important;
+  }
+
+  .text-gray-600,
+  .text-slate-600 {
+    color: #d4d4d4 !important;
+    font-weight: 500 !important;
+  }
+
+  .text-gray-500,
+  .text-slate-500 {
+    color: #d4d4d4 !important;
+    font-weight: 500 !important;
+  }
+
+  .text-gray-400,
+  .text-slate-400 {
+    color: #a3a3a3 !important;
+    font-weight: 500 !important;
+  }
+}
+
+/* Background Color High Contrast Fixes */
+.bg-gray-50,
+.bg-slate-50 {
+  background-color: #f5f5f5 !important;
+}
+
+.bg-gray-100,
+.bg-slate-100 {
+  background-color: #e5e5e5 !important;
+}
+
+.bg-gray-200,
+.bg-slate-200 {
+  background-color: #d4d4d4 !important;
+}
+
+.bg-gray-300,
+.bg-slate-300 {
+  background-color: #a3a3a3 !important;
+  color: #000000 !important;
+}
+
+@media (prefers-color-scheme: dark) {
+  .bg-gray-50,
+  .bg-slate-50 {
+    background-color: #0a0a0a !important;
+  }
+
+  .bg-gray-100,
+  .bg-slate-100 {
+    background-color: #1a1a1a !important;
+  }
+
+  .bg-gray-200,
+  .bg-slate-200 {
+    background-color: #262626 !important;
+  }
+
+  .bg-gray-300,
+  .bg-slate-300 {
+    background-color: #404040 !important;
+    color: #ffffff !important;
+  }
+}
+
+/* Input and Border High Contrast */
+.border-gray-300,
+.border-slate-300 {
+  border-color: #a3a3a3 !important;
+}
+
+.border-gray-200,
+.border-slate-200 {
+  border-color: #d4d4d4 !important;
+}
+
+@media (prefers-color-scheme: dark) {
+  .border-gray-300,
+  .border-slate-300 {
+    border-color: #525252 !important;
+  }
+
+  .border-gray-200,
+  .border-slate-200 {
+    border-color: #404040 !important;
+  }
+}
+
+.placeholder-gray-500::placeholder,
+.placeholder-slate-500::placeholder {
+  color: #737373 !important;
+  opacity: 1 !important;
+}
+
+@media (prefers-color-scheme: dark) {
+  .placeholder-gray-500::placeholder,
+  .placeholder-slate-500::placeholder {
+    color: #a3a3a3 !important;
+    opacity: 1 !important;
+  }
+}
+
+/* Hover States with High Contrast */
+.hover\:bg-gray-50:hover,
+.hover\:bg-slate-50:hover {
+  background-color: #f5f5f5 !important;
+}
+
+.hover\:bg-gray-100:hover,
+.hover\:bg-slate-100:hover {
+  background-color: #e5e5e5 !important;
+}
+
+.hover\:bg-gray-400:hover {
+  background-color: #a3a3a3 !important;
+}
+
+.hover\:text-gray-700:hover,
+.hover\:text-slate-700:hover {
+  color: #262626 !important;
+}
+
+@media (prefers-color-scheme: dark) {
+  .hover\:bg-gray-50:hover,
+  .hover\:bg-slate-50:hover {
+    background-color: #1a1a1a !important;
+  }
+
+  .hover\:bg-gray-100:hover,
+  .hover\:bg-slate-100:hover {
+    background-color: #262626 !important;
+  }
+
+  .hover\:bg-gray-400:hover {
+    background-color: #525252 !important;
+  }
+
+  .hover\:text-gray-700:hover,
+  .hover\:text-slate-700:hover {
+    color: #e5e5e5 !important;
+  }
+}
+
+/* Card and Container Backgrounds */
+.bg-white {
+  background-color: #ffffff !important;
+  color: #000000 !important;
+}
+
+@media (prefers-color-scheme: dark) {
+  .bg-white {
+    background-color: #1a1a1a !important;
+    color: #ffffff !important;
+  }
+}
+
+/* Ensure all headings are high contrast */
+h1, h2, h3, h4, h5, h6,
+.font-bold, .font-semibold, .font-black {
+  color: inherit;
+  font-weight: 700 !important;
+}
+
+/* Table improvements */
+table {
+  color: inherit;
+}
+
+th {
+  font-weight: 700 !important;
+  color: inherit;
+}
+
+td {
+  color: inherit;
+}
+
+/* Link improvements */
+a {
+  color: inherit;
+  font-weight: 600;
+}
+
+a:hover {
+  opacity: 0.8;
+}
+
+/* Button text always visible */
+button {
+  font-weight: 600 !important;
 }

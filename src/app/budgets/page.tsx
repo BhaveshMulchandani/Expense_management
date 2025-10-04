@@ -129,21 +129,21 @@ export default function BudgetsPage() {
   const getStatusBadge = (budget: Budget) => {
     if (budget.isExceeded) {
       return (
-        <span className="px-2 py-1 text-xs font-semibold bg-red-100 text-red-800 rounded">
-          Exceeded
+        <span className="px-3 py-1.5 text-xs font-bold bg-red-600 text-white dark:bg-red-500 rounded-xl shadow-md">
+          🚨 Exceeded
         </span>
       );
     }
     if (budget.shouldAlert) {
       return (
-        <span className="px-2 py-1 text-xs font-semibold bg-yellow-100 text-yellow-800 rounded">
-          Alert
+        <span className="px-3 py-1.5 text-xs font-bold bg-amber-600 text-white dark:bg-amber-500 rounded-xl shadow-md">
+          ⚠️ Alert
         </span>
       );
     }
     return (
-      <span className="px-2 py-1 text-xs font-semibold bg-green-100 text-green-800 rounded">
-        On Track
+      <span className="px-3 py-1.5 text-xs font-bold bg-emerald-600 text-white dark:bg-emerald-500 rounded-xl shadow-md">
+        ✓ On Track
       </span>
     );
   };
@@ -151,13 +151,14 @@ export default function BudgetsPage() {
   if (loading) return <Loading />;
 
   return (
-    <div className="max-w-7xl mx-auto">
-      <div className="flex justify-between items-center mb-8">
-        <h1 className="text-3xl font-bold">Budget Management</h1>
-        <Button onClick={() => setShowForm(!showForm)}>
-          {showForm ? "Cancel" : "+ Add Budget"}
-        </Button>
-      </div>
+    <div className="min-h-screen bg-white dark:bg-black">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div className="flex justify-between items-center mb-8">
+          <h1 className="text-4xl font-black text-black dark:text-white tracking-tight">Budget Management</h1>
+          <Button onClick={() => setShowForm(!showForm)} variant="gradient">
+            {showForm ? "Cancel" : "+ Add Budget"}
+          </Button>
+        </div>
 
       {showForm && (
         <Card className="mb-8">
@@ -329,14 +330,15 @@ export default function BudgetsPage() {
         ))}
       </div>
 
-      {budgets.length === 0 && !showForm && (
-        <div className="text-center py-12">
-          <p className="text-gray-500 mb-4">
-            No budgets found. Create your first budget to start tracking!
-          </p>
-          <Button onClick={() => setShowForm(true)}>+ Add Budget</Button>
-        </div>
-      )}
+        {budgets.length === 0 && !showForm && (
+          <div className="text-center py-12">
+            <p className="text-gray-600 dark:text-gray-400 mb-4 font-semibold">
+              No budgets found. Create your first budget to start tracking!
+            </p>
+            <Button onClick={() => setShowForm(true)} variant="gradient">+ Add Budget</Button>
+          </div>
+        )}
+      </div>
     </div>
   );
 }
